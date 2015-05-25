@@ -14,6 +14,7 @@
 		9DF820571B135B5000CCF565 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DF820561B135B5000CCF565 /* Images.xcassets */; };
 		9DF8205A1B135B5000CCF565 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DF820581B135B5000CCF565 /* LaunchScreen.xib */; };
 		9DF820661B135B5000CCF565 /* tabTableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF820651B135B5000CCF565 /* tabTableViewTests.m */; };
+		9DF820711B135B7400CCF565 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF820701B135B7400CCF565 /* UIView+AutoLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		9DF8205F1B135B5000CCF565 /* tabTableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tabTableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF820641B135B5000CCF565 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DF820651B135B5000CCF565 /* tabTableViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tabTableViewTests.m; sourceTree = "<group>"; };
+		9DF8206F1B135B7400CCF565 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		9DF820701B135B7400CCF565 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				9DF8204E1B135B5000CCF565 /* AppDelegate.m */,
 				9DF820501B135B5000CCF565 /* ViewController.h */,
 				9DF820511B135B5000CCF565 /* ViewController.m */,
+				9DF8206F1B135B7400CCF565 /* UIView+AutoLayout.h */,
+				9DF820701B135B7400CCF565 /* UIView+AutoLayout.m */,
 				9DF820531B135B5000CCF565 /* Main.storyboard */,
 				9DF820561B135B5000CCF565 /* Images.xcassets */,
 				9DF820581B135B5000CCF565 /* LaunchScreen.xib */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DF820521B135B5000CCF565 /* ViewController.m in Sources */,
+				9DF820711B135B7400CCF565 /* UIView+AutoLayout.m in Sources */,
 				9DF8204F1B135B5000CCF565 /* AppDelegate.m in Sources */,
 				9DF8204C1B135B5000CCF565 /* main.m in Sources */,
 			);
