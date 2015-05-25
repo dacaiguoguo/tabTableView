@@ -95,12 +95,21 @@
 - (UILabel *)headView {
     if (nil == _headView) {
         _headView = [[UILabel alloc] init];
+        _headView.textAlignment = NSTextAlignmentCenter;
         _headView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:.6];
-        _headView.text = @"headView";
+        _headView.text = @"tabView1,       tabView2,      tabView3";
+        _headView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHeaderAction:)];
+        [_headView addGestureRecognizer:tap];
     }
     return _headView;
 }
 
+- (void)tapHeaderAction:(UITapGestureRecognizer *)tap {
+    CGPoint p = [tap locationInView:tap.view];
+    int xDe = p.x / ((int)CGRectGetWidth(self.view.bounds)/3);
+    _leftSpace.constant = -xDe * CGRectGetWidth(self.view.bounds);
+}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView.tag == 779) {
@@ -113,10 +122,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (tableView == _bigTableView) {
-        UILabel *headView = [[UILabel alloc] init];
-        headView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:.6];
-        headView.text = @"headView";
-        return headView;
+        return self.headView;
     }
     return nil;
 
