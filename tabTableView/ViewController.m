@@ -112,13 +112,16 @@
     }
 //    return;
     if (_bigTableView == scrollView) {
-        _smallTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y - topOffset);
-//        _smailTwoTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
-//        _smailThirdTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
+        isSetting = YES;
+        CGPoint ppp = CGPointMake(0, scrollView.contentOffset.y - topOffset);
+        _smallTableView.contentOffset = ppp;
+        _smailTwoTableView.contentOffset = ppp;
+        _smailThirdTableView.contentOffset = ppp;
+        isSetting = NO;
     }
-//    if (scrollView.tag == 779) {
-//        _leftSpace.constant = -scrollView.contentOffset.x;
-//    }
+    if (scrollView.tag == 779) {
+        _leftSpace.constant = -scrollView.contentOffset.x;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -148,15 +151,31 @@
 }
 
 
+- (NSUInteger)nowTableIndex {
+    for (NSUInteger i=0; i<smallTables.count; i++) {
+        
+    }
+   __block NSInteger ret = -1;
+    [smallTables enumerateObjectsUsingBlock:^(UITableView* obj, NSUInteger idx, BOOL *stop) {
+        if (obj.center.x > 0 && obj.center.x < [[UIApplication sharedApplication] keyWindow].bounds.size.width) {
+            ret = idx;
+            *stop = YES;
+        }
+    }];
+    return ret;
+}
+
 - (void)tapCellAction:(UITapGestureRecognizer *)tap {
-    CGPoint tapPoint = [tap locationInView:_smallTableView];
-    [[_smallTableView visibleCells] enumerateObjectsUsingBlock:^(UITableViewCell *obj, NSUInteger idx, BOOL *stop) {
+    NSUInteger nowindex = [self nowTableIndex];
+    UITableView *currentTableView = [smallTables objectAtIndex:nowindex];
+    CGPoint tapPoint = [tap locationInView:currentTableView];
+    [[currentTableView visibleCells] enumerateObjectsUsingBlock:^(UITableViewCell *obj, NSUInteger idx, BOOL *stop) {
         if (CGRectContainsPoint(obj.frame, tapPoint) == true) {
-            NSIndexPath *index = [_smallTableView indexPathForCell:obj];
-            NSLog(@"%zd->%zd",index.section, index.row);
+            NSIndexPath *index = [currentTableView indexPathForCell:obj];
+            NSLog(@"-%zd---%zd->%zd",nowindex,index.section, index.row);
             [[[obj contentView] subviews] enumerateObjectsUsingBlock:^(UIButton *subobj, NSUInteger subidx, BOOL *substop) {
                 if ([subobj isKindOfClass:[UIButton class]]) {
-                   CGRect subRECT =  [_smallTableView convertRect:[subobj frame] fromView:obj];
+                   CGRect subRECT =  [currentTableView convertRect:[subobj frame] fromView:obj];
                     if (CGRectContainsPoint(subRECT, tapPoint) == true) {
                         NSLog(@"----->%@",[subobj titleForState:UIControlStateNormal]);
                     }
