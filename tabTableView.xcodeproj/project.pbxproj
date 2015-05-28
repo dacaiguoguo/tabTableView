@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DEB2A631B17026500A18569 /* TouchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEB2A611B17026500A18569 /* TouchTableViewCell.m */; };
+		9DEB2A641B17026500A18569 /* TouchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB2A621B17026500A18569 /* TouchTableViewCell.xib */; };
 		9DF8204C1B135B5000CCF565 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8204B1B135B5000CCF565 /* main.m */; };
 		9DF8204F1B135B5000CCF565 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8204E1B135B5000CCF565 /* AppDelegate.m */; };
 		9DF820521B135B5000CCF565 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF820511B135B5000CCF565 /* ViewController.m */; };
@@ -28,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9DEB2A601B17026500A18569 /* TouchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableViewCell.h; sourceTree = "<group>"; };
+		9DEB2A611B17026500A18569 /* TouchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTableViewCell.m; sourceTree = "<group>"; };
+		9DEB2A621B17026500A18569 /* TouchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TouchTableViewCell.xib; sourceTree = "<group>"; };
 		9DF820461B135B5000CCF565 /* tabTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tabTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF8204A1B135B5000CCF565 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DF8204B1B135B5000CCF565 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -88,6 +93,9 @@
 				9DF8204E1B135B5000CCF565 /* AppDelegate.m */,
 				9DF820501B135B5000CCF565 /* ViewController.h */,
 				9DF820511B135B5000CCF565 /* ViewController.m */,
+				9DEB2A601B17026500A18569 /* TouchTableViewCell.h */,
+				9DEB2A611B17026500A18569 /* TouchTableViewCell.m */,
+				9DEB2A621B17026500A18569 /* TouchTableViewCell.xib */,
 				9DF8206F1B135B7400CCF565 /* UIView+AutoLayout.h */,
 				9DF820701B135B7400CCF565 /* UIView+AutoLayout.m */,
 				9DF820531B135B5000CCF565 /* Main.storyboard */,
@@ -205,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DF820551B135B5000CCF565 /* Main.storyboard in Resources */,
+				9DEB2A641B17026500A18569 /* TouchTableViewCell.xib in Resources */,
 				9DF8205A1B135B5000CCF565 /* LaunchScreen.xib in Resources */,
 				9DF820571B135B5000CCF565 /* Images.xcassets in Resources */,
 			);
@@ -225,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DF820521B135B5000CCF565 /* ViewController.m in Sources */,
+				9DEB2A631B17026500A18569 /* TouchTableViewCell.m in Sources */,
 				9DF820711B135B7400CCF565 /* UIView+AutoLayout.m in Sources */,
 				9DF8204F1B135B5000CCF565 /* AppDelegate.m in Sources */,
 				9DF8204C1B135B5000CCF565 /* main.m in Sources */,
@@ -422,6 +432,7 @@
 				9DF8206B1B135B5000CCF565 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9DF8206C1B135B5000CCF565 /* Build configuration list for PBXNativeTarget "tabTableViewTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +441,7 @@
 				9DF8206E1B135B5000CCF565 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

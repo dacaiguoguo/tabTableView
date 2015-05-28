@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "UIView+AutoLayout.h"
+#import "TouchTableViewCell.h"
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *smallTableView;
@@ -22,10 +23,12 @@
     int headerHeight;
     float topOffset;
     BOOL isSetting;
+    NSString *IDENTIFIER;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    IDENTIFIER = @"TouchTableViewCell";
     headerHeight = 44;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [_bigTableView setLayoutMargins:UIEdgeInsetsZero];
@@ -33,6 +36,13 @@
     _bigTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     _widthConstraint.constant = CGRectGetWidth(self.view.frame);
     [self.view bringSubviewToFront:_bigTableView];
+    UITapGestureRecognizer *tab = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCellAction:)];
+    [self.view addGestureRecognizer:tab];
+    [_smallTableView registerNib:[UINib nibWithNibName:@"TouchTableViewCell" bundle:nil] forCellReuseIdentifier:IDENTIFIER];
+    [_smailTwoTableView registerNib:[UINib nibWithNibName:@"TouchTableViewCell" bundle:nil] forCellReuseIdentifier:IDENTIFIER];
+    [_smailThirdTableView registerNib:[UINib nibWithNibName:@"TouchTableViewCell" bundle:nil] forCellReuseIdentifier:IDENTIFIER];
+
+    
 }
 
 
@@ -135,6 +145,17 @@
     int xDe = p.x / ((int)CGRectGetWidth(self.view.bounds)/3);
     _leftSpace.constant = -xDe * CGRectGetWidth(self.view.bounds);
     [_bigTableView reloadData];
+}
+
+
+- (void)tapCellAction:(UITapGestureRecognizer *)tap {
+    CGPoint tapPoint = [tap locationInView:_smallTableView];
+    [[_smallTableView visibleCells] enumerateObjectsUsingBlock:^(UITableViewCell *obj, NSUInteger idx, BOOL *stop) {
+        if (CGRectContainsPoint(obj.frame, tapPoint) == true) {
+            NSIndexPath *index = [_smallTableView indexPathForCell:obj];
+            NSLog(@"%zd->%zd",index.section, index.row);
+        }
+    }];
 
 }
 
@@ -184,15 +205,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (tableView.tag >= 999) {
-        static NSString *cellIdentifier = @"SmaillCell";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        if(cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor = [UIColor grayColor];
-        }
+        TouchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IDENTIFIER];
         cell.textLabel.text = [NSString stringWithFormat:@"Small Cell %ld--%ld", (long)indexPath.row,tableView.tag - 998];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Small Cell %ld--%ld", (long)indexPath.row,tableView.tag - 998];
         return cell;
