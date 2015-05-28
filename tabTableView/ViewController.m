@@ -154,6 +154,14 @@
         if (CGRectContainsPoint(obj.frame, tapPoint) == true) {
             NSIndexPath *index = [_smallTableView indexPathForCell:obj];
             NSLog(@"%zd->%zd",index.section, index.row);
+            [[[obj contentView] subviews] enumerateObjectsUsingBlock:^(UIButton *subobj, NSUInteger subidx, BOOL *substop) {
+                if ([subobj isKindOfClass:[UIButton class]]) {
+                   CGRect subRECT =  [_smallTableView convertRect:[subobj frame] fromView:obj];
+                    if (CGRectContainsPoint(subRECT, tapPoint) == true) {
+                        NSLog(@"----->%@",[subobj titleForState:UIControlStateNormal]);
+                    }
+                }
+            }];
         }
     }];
 
