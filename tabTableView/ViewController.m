@@ -19,10 +19,14 @@
 
 @implementation ViewController {
     NSArray *smallTables;
+    int headerHeight;
+    float topOffset;
+    BOOL isSetting;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    headerHeight = 44;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     [_bigTableView setLayoutMargins:UIEdgeInsetsZero];
     smallTables = @[_smallTableView,_smailTwoTableView,_smailThirdTableView];
@@ -37,14 +41,16 @@
     [_bigTableView reloadData];
     [_bigTableView setBackgroundView:nil];
     [_bigTableView setBackgroundColor:[UIColor clearColor]];
-    float topOffset = [_bigTableView rectForSection:0].size.height;
-    topOffset += 40;
+    topOffset = [_bigTableView rectForSection:0].size.height;
+    topOffset += headerHeight;
+    isSetting = YES;
     [_smallTableView setContentInset:UIEdgeInsetsMake(topOffset, 0, 0, 0)];
     [_smailTwoTableView setContentInset:UIEdgeInsetsMake(topOffset, 0, 0, 0)];
     [_smailThirdTableView setContentInset:UIEdgeInsetsMake(topOffset, 0, 0, 0)];
     [_smallTableView setContentOffset:CGPointMake(0, -topOffset)];
     [_smailTwoTableView setContentOffset:CGPointMake(0, -topOffset)];
     [_smailThirdTableView setContentOffset:CGPointMake(0, -topOffset)];
+    isSetting = NO;
 }
 #pragma mark - UITableView Datasource
 
@@ -91,9 +97,12 @@
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (isSetting) {
+        return;
+    }
 //    return;
     if (_bigTableView == scrollView) {
-        _smallTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y - 340);
+        _smallTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y - topOffset);
 //        _smailTwoTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
 //        _smailThirdTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
     }
@@ -163,7 +172,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (tableView ==_bigTableView) {
         if (section == 1) {
-            return 44;
+            return headerHeight;
         }
         return 0;
     }
