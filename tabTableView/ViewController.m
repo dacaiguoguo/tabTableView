@@ -48,48 +48,66 @@
     if (tableView.tag >= 999) {
         return 1;
     }
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag >= 999) {
-        return 100;
+        if (tableView.tag == 999) {
+            return 30;
+        }
+        if (tableView.tag == 1000) {
+            return 20;
+        }
+        return 10;
     }
-    return 5;
+    if (section == 1) {
+        return 1;
+    }
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag >= 999) {
         return 44;
     }
-    if (indexPath.row == 4 ) {
-        return 44*100;
+    if (indexPath.section == 1 ) {
+        int absss =  fabs(_leftSpace.constant/CGRectGetWidth(self.view.bounds));
+        if (absss == 0) {
+            return  30 * 44;
+        }
+        if (absss == 1) {
+            return 20* 44;
+        }
+        return 44*10;
     }
     return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (tableView ==_bigTableView) {
-        return 44;
+        if (section == 1) {
+            return 44;
+        }
+        return 0;
     }
     return 0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (_bigTableView == scrollView) {
-        if (_leftSpace.constant == 0) {
-            _smallTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
-        }
-        else if (_leftSpace.constant == -scrollView.bounds.size.width) {
-            _smailTwoTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
-        }
-        else {
-            _smailThirdTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
-        }
+        _smallTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
+        _smailTwoTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
+        _smailThirdTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
     }
     if (scrollView.tag == 779) {
         _leftSpace.constant = -scrollView.contentOffset.x;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"dacaiguoguo:\n%s\n%@",__func__,tableView);
+
 }
 
 - (UILabel *)headView {
@@ -109,15 +127,20 @@
     CGPoint p = [tap locationInView:tap.view];
     int xDe = p.x / ((int)CGRectGetWidth(self.view.bounds)/3);
     _leftSpace.constant = -xDe * CGRectGetWidth(self.view.bounds);
+    [_bigTableView reloadData];
+
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView.tag == 779) {
-        int index =  scrollView.contentOffset.x/scrollView.bounds.size.width;
-        UITableView *currentTable = smallTables[index];
-        currentTable.contentOffset = CGPointMake(0, _bigTableView.contentOffset.y+64);
-
+        [_bigTableView reloadData];
     }
+//    if (scrollView.tag == 779) {
+//        int index =  scrollView.contentOffset.x/scrollView.bounds.size.width;
+//        UITableView *currentTable = smallTables[index];
+//        currentTable.contentOffset = CGPointMake(0, _bigTableView.contentOffset.y+64);
+//
+//    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -139,13 +162,13 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"Small Cell %ld--%ld", (long)indexPath.row,tableView.tag - 999];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"Small Cell %ld--%ld", (long)indexPath.row,tableView.tag - 999];
+        cell.textLabel.text = [NSString stringWithFormat:@"Small Cell %ld--%ld", (long)indexPath.row,tableView.tag - 998];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Small Cell %ld--%ld", (long)indexPath.row,tableView.tag - 998];
         return cell;
     }
     
     
-    if (indexPath.row == 4) {
+    if (indexPath.section == 1) {
         static NSString *cellIdentifier = @"BigCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if(cell == nil) {
@@ -180,10 +203,5 @@
     return cell;
 }
 
-#pragma mark - UITableView Delegate methods
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
 
 @end
