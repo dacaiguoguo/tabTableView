@@ -25,7 +25,7 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" tag="999" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-Bv-Vpm" userLabel="table1">
-                                <rect key="frame" x="0.0" y="120" width="100" height="448"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="tAR-4L-50X"/>
@@ -36,7 +36,7 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" tag="1000" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8gf-93-0Qj" userLabel="table2">
-                                <rect key="frame" x="100" y="120" width="100" height="448"/>
+                                <rect key="frame" x="100" y="0.0" width="100" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="SqW-ed-kcV"/>
@@ -44,7 +44,7 @@
                                 </connections>
                             </tableView>
                             <tableView clipsSubviews="YES" tag="1001" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iFI-Vw-QhB" userLabel="table3">
-                                <rect key="frame" x="200" y="120" width="100" height="448"/>
+                                <rect key="frame" x="200" y="0.0" width="100" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="gZj-eb-hYB"/>
@@ -58,7 +58,7 @@
                             <constraint firstItem="ReO-v5-ahc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ENX-LG-Ebc"/>
                             <constraint firstAttribute="trailing" secondItem="ReO-v5-ahc" secondAttribute="trailing" id="Hbw-g0-ddJ"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ReO-v5-ahc" secondAttribute="bottom" id="K8M-c7-Mp1"/>
-                            <constraint firstItem="LVc-Bv-Vpm" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="120" id="Q0l-Hf-VsV"/>
+                            <constraint firstItem="LVc-Bv-Vpm" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Q0l-Hf-VsV"/>
                             <constraint firstItem="LVc-Bv-Vpm" firstAttribute="centerY" secondItem="iFI-Vw-QhB" secondAttribute="centerY" id="Tpy-a0-SWa"/>
                             <constraint firstItem="LVc-Bv-Vpm" firstAttribute="width" secondItem="iFI-Vw-QhB" secondAttribute="width" id="Zf2-je-8VS"/>
                             <constraint firstItem="8gf-93-0Qj" firstAttribute="leading" secondItem="LVc-Bv-Vpm" secondAttribute="trailing" id="dja-Ql-PR0"/>

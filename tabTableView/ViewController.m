@@ -24,8 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    [_bigTableView setLayoutMargins:UIEdgeInsetsZero];
     smallTables = @[_smallTableView,_smailTwoTableView,_smailThirdTableView];
-    _bigTableView.contentInset = UIEdgeInsetsMake(84, 0, 0, 0);
+    _bigTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     _widthConstraint.constant = CGRectGetWidth(self.view.frame);
     [self.view bringSubviewToFront:_bigTableView];
 }
@@ -36,11 +37,8 @@
     [_bigTableView reloadData];
     [_bigTableView setBackgroundView:nil];
     [_bigTableView setBackgroundColor:[UIColor clearColor]];
-    [[_bigTableView subviews] enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
-        obj.backgroundColor = [UIColor clearColor];
-    }];
     float topOffset = [_bigTableView rectForSection:0].size.height;
-    topOffset -= 20;
+    topOffset += 40;
     [_smallTableView setContentInset:UIEdgeInsetsMake(topOffset, 0, 0, 0)];
     [_smailTwoTableView setContentInset:UIEdgeInsetsMake(topOffset, 0, 0, 0)];
     [_smailThirdTableView setContentInset:UIEdgeInsetsMake(topOffset, 0, 0, 0)];
@@ -95,13 +93,13 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    return;
     if (_bigTableView == scrollView) {
-        _smallTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y - 206);
-        _smailTwoTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
-        _smailThirdTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
+        _smallTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y - 340);
+//        _smailTwoTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
+//        _smailThirdTableView.contentOffset = CGPointMake(0, scrollView.contentOffset.y+64);
     }
-    if (scrollView.tag == 779) {
-        _leftSpace.constant = -scrollView.contentOffset.x;
-    }
+//    if (scrollView.tag == 779) {
+//        _leftSpace.constant = -scrollView.contentOffset.x;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -145,18 +143,16 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (tableView == _bigTableView) {
-        UIView *v = [UIView new];
-        v.backgroundColor = [UIColor greenColor];
-        return v;
+        if (section == 1) {
+            return self.headView;
+        }
     }
     UIView *v = [UIView new];
-    v.layer.borderWidth = 1.;
     return v;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *v = [UIView new];
-    v.layer.borderWidth = 1.;
     return v;
 }
 
@@ -166,12 +162,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (tableView ==_bigTableView) {
-//        if (section == 1) {
-//            return 44;
-//        }
-//        return 20;
-        return 44;
-
+        if (section == 1) {
+            return 44;
+        }
+        return 0;
     }
     return 0;
 }
@@ -208,16 +202,10 @@
             scrollView.pagingEnabled = YES;
             scrollView.delegate = self;
             scrollView.contentSize = CGSizeMake([[UIApplication sharedApplication] keyWindow].bounds.size.width *3, cell.bounds.size.height) ;
-//            scrollView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:.4];
+            scrollView.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:.4];
             [scrollView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
-            cell.contentView.layer.borderWidth = 2;
-            cell.layoutMargins = UIEdgeInsetsZero;
-            cell.contentView.layoutMargins = UIEdgeInsetsZero;
         }
         cell.backgroundColor = [UIColor clearColor];
-        [[cell subviews] enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
-            obj.backgroundColor = [UIColor clearColor];
-        }];
         cell.backgroundView = nil;
         return cell;
     }
@@ -230,15 +218,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setClipsToBounds:YES];
+        cell.backgroundView = nil;
     }
     cell.textLabel.text = [NSString stringWithFormat:@"Cell %ld", (long)indexPath.row];
-    cell.clipsToBounds = YES;
-    if (indexPath.row ==2) {
-        cell.backgroundColor = [UIColor darkGrayColor];
-    } else {
-        cell.backgroundColor = [UIColor whiteColor];
-    }
-    cell.backgroundView = nil;
     return cell;
 }
 
